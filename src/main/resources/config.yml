@@ -1,0 +1,12 @@
+# this ONLY used when a Permissions-compatible plugin isn't found.  In that case,
+# any permissions listed here are given to everyone by default (ops always have
+# full permissions)
+#defaultPermissions:
+#- mgc.command.mgc.use
+
+# you can enable/disable individual commands here. Disabled commands will not be processed,
+# leaving them open for other plugins to use.
+#
+# Permissions for access to use each enabled command is: mgc.command.<commandName>.use
+disabledCommands:
+  mgc: false

@@ -1,0 +1,9 @@
+name: MobGrinderControl
+main: org.morganm.mobgrindercontrol.MobGrinderControlPlugin
+version: 0.1
+author: morganm
+database: false
+commands:
+  mgc:
+    description: MobGrinder admin controls
+    usage: /<command>

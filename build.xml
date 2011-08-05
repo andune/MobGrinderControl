@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project name="MobGrinderControl" default="dist" basedir=".">
+        <property file="${basedir}/build.local.properties" />
+        <property file="${basedir}/build.properties" />
+
+	<path id="project.classpath">
+		<fileset dir="${lib.home}">
+			<include name="**/*.jar" />
+			<include name="**/*.zip" />
+		</fileset>
+		<pathelement path="${build.home}" />
+	</path>
+
+	<target name="prepare">
+		<mkdir dir="${build.home}" />
+		<mkdir dir="${build.metainf}" />
+		<mkdir dir="${dist.home}" />
+	</target>
+
+	<target name="clean" description="Remove all generated files.">
+		<delete dir="${build.home}" />
+		<delete dir="${dist.home}" />
+	</target>
+
+	<target name="compile" depends="prepare" description="Compile all source code">
+		<javac srcdir="${src.home}" destdir="${build.home}" >
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="buildCommandList" depends="compile" description="Build project command list file">
+		<java classname="org.morganm.mobgrindercontrol.command.CommandFileGenerator" >
+			<classpath refid="project.classpath" />
+			<arg file="${commandlistfile}" />
+		</java>
+	</target>
+	
+	<target name="dist" depends="buildCommandList" description="Generates distribution jar file">
+		<copy todir="${build.home}">
+			<fileset dir="${config.home}">
+				<include name="**/*.yml"/>
+			</fileset>
+		</copy>
+
+		<jar jarfile="${jarfile}" >
+			<fileset dir="${build.home}" />
+		</jar>
+	</target>
+
+</project>
